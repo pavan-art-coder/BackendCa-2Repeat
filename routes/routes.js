@@ -1,6 +1,6 @@
 const express=require('express')
 const UserSchema=require('../models/Usermodel')
-const bcrypt=require('bcrypt')
+
 
 const router=express.Router()
 
@@ -27,12 +27,12 @@ router.post('/add-user',async(req,res)=>{
             res.status(400).json({message:"User Already Exist"})
         }
 
-        const hashp=await bcrypt.hash({Password})
+  
         const newUser=await UserSchema.create
         ({
           Username,
           email,
-          Password:hashp 
+          Password,
         })
 
         res.status(200).json({message:"User Registerd Succesfully",User:newUser})
